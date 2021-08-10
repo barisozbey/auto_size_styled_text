@@ -1,0 +1,19 @@
+name: auto_size_styled_text
+description: Text widget with formatted text using tags. Makes it easier to use formatted text in multilingual applications.Automatically resizes text to fit perfectly within its bounds. Combination of styled_text and auto_size_text package. 
+version: 1.0.0
+author: Barış Özbey <barisozbeyy@gmail.com>
+homepage:
+
+environment:
+  sdk: ">=2.12.0 <3.0.0"
+  flutter: ">=1.17.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  xmlstream: ^1.0.0
+  auto_size_text: ^3.0.0-nullsafety.0
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
