@@ -6,7 +6,6 @@ Text widget with formatted text using tags. Makes it easier to use formatted tex
 
 - [Getting Started](#getting-Started)
 - [Usage examples](#usage-examples)
-- [Migration from version 2.0](#migration-from-version-20)
 
 ## Getting Started
 
