@@ -6,7 +6,6 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:xmlstream/xmlstream.dart';
-import 'package:auto_size_styled_text/tags/styled_text_tag.dart';
 import 'package:auto_size_styled_text/tags/styled_text_tag_base.dart';
 
 export 'icon_style.dart';
@@ -68,20 +67,6 @@ class AutoSizeStyledText extends StatefulWidget {
 
   /// Default text style.
   final TextStyle? style;
-
-  /// Style map for tags in text.
-  ///
-  /// Example:
-  /// ```dart
-  /// AutoSizeStyledText(
-  ///   text: '<red>Red</red> text.',
-  ///   styles: [
-  ///     'red': TextStyle(color: Colors.red),
-  ///   ],
-  /// )
-  /// ```
-  @Deprecated('Use tags instead of styles.')
-  final Map<String, TextStyle> styles;
 
   /// Map of tag assignments to text style classes and tag handlers.
   ///
@@ -200,8 +185,6 @@ class AutoSizeStyledText extends StatefulWidget {
     required this.text,
     this.newLineAsBreaks = true,
     this.style,
-    @Deprecated('Use tags property instead of styles')
-        Map<String, TextStyle>? styles,
     Map<String, AutoSizeStyledTextTagBase>? tags,
     this.textAlign = TextAlign.start,
     this.textDirection,
@@ -220,13 +203,7 @@ class AutoSizeStyledText extends StatefulWidget {
     this.overflowReplacement,
     this.textKey,
     this.semanticsLabel,
-  })  : assert(
-          styles != null || tags != null,
-          'Styles and tags cannot be used at the same time. Use styles for compatibility only. They will be removed in future versions.',
-        ),
-        this.styles = // ignore: deprecated_member_use_from_same_package
-            styles ?? const {},
-        this.tags = tags ?? const {},
+  })  : this.tags = tags ?? const {},
         super(key: key);
 
   @override
@@ -250,9 +227,6 @@ class _AutoSizeStyledTextState extends State<AutoSizeStyledText> {
 
     if ((widget.text != oldWidget.text) ||
         (widget.tags != oldWidget.tags) ||
-        (widget.styles != // ignore: deprecated_member_use_from_same_package
-            oldWidget
-                .styles) || // ignore: deprecated_member_use_from_same_package
         (widget.style != oldWidget.style) ||
         (widget.newLineAsBreaks != oldWidget.newLineAsBreaks)) {
       _updateTextSpans(force: true);
@@ -264,14 +238,6 @@ class _AutoSizeStyledTextState extends State<AutoSizeStyledText> {
 
     if (widget.tags.containsKey(tagName)) {
       return widget.tags[tagName];
-    }
-
-    // ignore: deprecated_member_use_from_same_package
-    if (widget.styles.containsKey(tagName)) {
-      return AutoSizeStyledTextTag(
-          style:
-              widget.styles[// ignore: deprecated_member_use_from_same_package
-                  tagName]);
     }
 
     return null;
