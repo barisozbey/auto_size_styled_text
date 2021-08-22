@@ -1,7 +1,6 @@
 name: auto_size_styled_text
 description: Text widget with formatted text using tags. Makes it easier to use formatted text in multilingual applications.Automatically resizes text to fit perfectly within its bounds. Combination of styled_text and auto_size_text package. 
 version: 1.0.0
-author: Barış Özbey <barisozbeyy@gmail.com>
 homepage: https://github.com/barisozbey/auto_size_styled_text
 
 environment:

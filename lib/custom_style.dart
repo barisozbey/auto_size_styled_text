@@ -23,6 +23,7 @@ class CustomStyle with Diagnosticable implements TextStyle {
       double decorationThicknessFactor = 1.0,
       double decorationThicknessDelta = 0.0,
       String? fontFamily,
+      TextOverflow? overflow,
       List<String>? fontFamilyFallback,
       double fontSizeFactor = 1.0,
       double fontSizeDelta = 0.0,
@@ -43,6 +44,7 @@ class CustomStyle with Diagnosticable implements TextStyle {
       color: color,
       backgroundColor: backgroundColor,
       decoration: decoration,
+      overflow: overflow,
       decorationColor: decorationColor,
       decorationStyle: decorationStyle,
       decorationThicknessFactor: decorationThicknessFactor,
@@ -77,6 +79,9 @@ class CustomStyle with Diagnosticable implements TextStyle {
   Color? get color => style.color;
 
   @override
+  TextOverflow? get overflow => style.overflow;
+
+  @override
   RenderComparison compareTo(TextStyle other) {
     return style.compareTo(other);
   }
@@ -93,6 +98,7 @@ class CustomStyle with Diagnosticable implements TextStyle {
       FontStyle? fontStyle,
       double? letterSpacing,
       double? wordSpacing,
+      TextOverflow? overflow,
       TextBaseline? textBaseline,
       double? height,
       ui.TextLeadingDistribution? leadingDistribution,
@@ -119,6 +125,7 @@ class CustomStyle with Diagnosticable implements TextStyle {
       wordSpacing: wordSpacing,
       textBaseline: textBaseline,
       height: height,
+      overflow: overflow,
       leadingDistribution: leadingDistribution,
       locale: locale,
       foreground: foreground,
