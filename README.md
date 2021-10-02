@@ -25,11 +25,11 @@ import 'package:auto_size_styled_text/auto_size_styled_text.dart';
 ## Usage Examples
 
 ```dart
-StyledText(
+AutoSizeStyledText(
   text: 'Test: <bold>bold</bold> and <red>red color</red> text.',
   tags: {
-    'bold': StyledTextTag(style: TextStyle(fontWeight: FontWeight.bold)),
-    'red': StyledTextTag(style: TextStyle(fontWeight: FontWeight.bold, color: Colors.red)),
+    'bold': AutoSizeStyledTextTag(style: TextStyle(fontWeight: FontWeight.bold)),
+    'red': AutoSizeStyledTextTag(style: TextStyle(fontWeight: FontWeight.bold, color: Colors.red)),
   },
 )
 ```

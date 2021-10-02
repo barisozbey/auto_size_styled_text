@@ -8,7 +8,7 @@ typedef ActionTappedCallback = void Function(
 ///
 /// Example:
 /// ```dart
-/// AutoSizeStyledText(
+/// StyledText(
 ///   text: 'Text with <link href="https://flutter.dev">link</link> inside.',
 ///   styles: {
 ///     'link': ActionTextStyle(

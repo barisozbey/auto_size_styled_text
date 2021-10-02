@@ -5,10 +5,10 @@ import 'package:auto_size_styled_text/tags/styled_text_tag_widget_builder.dart';
 ///
 /// In the example below, an input field is inserted in place of the tag:
 /// ```dart
-/// AutoSizeStyledText(
+/// StyledText(
 ///   text: 'Text with <input/> inside.',
 ///   tags: {
-///     'input': AutoSizeStyledTextWidgetTag(
+///     'input': StyledTextWidgetTag(
 ///       TextField(
 ///         decoration: InputDecoration(
 ///           hintText: 'Input',
@@ -20,8 +20,8 @@ import 'package:auto_size_styled_text/tags/styled_text_tag_widget_builder.dart';
 ///   },
 /// )
 /// ```
-class AutoSizeStyledTextWidgetTag extends AutoSizeStyledTextWidgetBuilderTag {
-  AutoSizeStyledTextWidgetTag(
+class StyledTextWidgetTag extends AutoSizeStyledTextWidgetBuilderTag {
+  StyledTextWidgetTag(
     Widget child, {
     Size? size,
     BoxConstraints? constraints,

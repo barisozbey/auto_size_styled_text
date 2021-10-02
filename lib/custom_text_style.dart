@@ -9,7 +9,7 @@ typedef CustomTextStyleCallback = TextStyle? Function(
 ///
 /// Example:
 /// ```dart
-/// AutoSizeStyledText(
+/// StyledText(
 ///   text: 'Text with custom <color text="#ff5500">color</color> text.',
 ///   styles: {
 ///     'color': CustomTextStyle(

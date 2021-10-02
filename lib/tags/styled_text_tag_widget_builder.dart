@@ -2,7 +2,7 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/widgets.dart';
 import 'package:auto_size_styled_text/tags/styled_text_tag_base.dart';
 
-/// Signature for the widget builder function for AutoSizeStyledTextWidgetBuilderTag
+/// Signature for the widget builder function for StyledTextWidgetBuilderTag
 typedef AutoSizeStyledTextWidgetBuilderTagCallback = Widget Function(
     BuildContext context, Map<String?, String?> attributes);
 
@@ -11,10 +11,10 @@ typedef AutoSizeStyledTextWidgetBuilderTagCallback = Widget Function(
 ///
 /// In the example below, an input field is inserted in place of the tag:
 /// ```dart
-/// AutoSizeStyledText(
+/// StyledText(
 ///   text: 'Text with <input/> inside.',
 ///   tags: {
-///     'input': AutoSizeStyledTextWidgetBuilderTag(
+///     'input': StyledTextWidgetBuilderTag(
 ///       (context, attributes) => TextField(
 ///         decoration: InputDecoration(
 ///           hintText: 'Input',

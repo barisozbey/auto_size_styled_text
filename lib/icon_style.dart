@@ -5,7 +5,7 @@ import 'package:flutter/widgets.dart';
 ///
 /// Example:
 /// ```dart
-/// AutoSizeStyledText(
+/// StyledText(
 ///   text: 'Text with alarm <alarm/> icon.',
 ///   styles: {
 ///     'alarm': IconStyle(Icons.alarm),

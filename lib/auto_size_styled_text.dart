@@ -2,7 +2,7 @@ library auto_size_styled_text;
 
 import 'dart:collection';
 
-import 'package:auto_size_text/auto_size_text.dart';
+import 'package:auto_size_text_pk/auto_size_text_pk.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:xmlstream/xmlstream.dart';
@@ -28,10 +28,10 @@ export 'tags/styled_text_tag_custom.dart';
 ///
 /// Example:
 /// ```dart
-/// AutoSizeStyledText(
+/// StyledText(
 ///   text: '<red>Red</red> text.',
 ///   tags: [
-///     'red': AutoSizeStyledTextTag(style: TextStyle(color: Colors.red)),
+///     'red': StyledTextTag(style: TextStyle(color: Colors.red)),
 ///   ],
 /// )
 /// ```
@@ -58,11 +58,6 @@ class AutoSizeStyledText extends StatefulWidget {
   ///
   final String text;
 
-  /// Sets the key for the resulting [Text] widget.
-  ///
-  /// This allows you to find the actual `Text` widget built by `AutoSizeText`.
-  final Key? textKey;
-
   /// Treat newlines as line breaks.
   final bool newLineAsBreaks;
 
@@ -73,7 +68,7 @@ class AutoSizeStyledText extends StatefulWidget {
   ///
   /// Example:
   /// ```dart
-  /// AutoSizeStyledText(
+  /// StyledText(
   ///   text: '<red>Red</red> text.',
   ///   styles: [
   ///     'red': TextStyle(color: Colors.red),
@@ -87,10 +82,10 @@ class AutoSizeStyledText extends StatefulWidget {
   ///
   /// Example:
   /// ```dart
-  /// AutoSizeStyledText(
+  /// StyledText(
   ///   text: '<red>Red</red> text.',
   ///   tags: [
-  ///     'red': AutoSizeStyledTextTag(style: TextStyle(color: Colors.red)),
+  ///     'red': StyledTextTag(style: TextStyle(color: Colors.red)),
   ///   ],
   /// )
   /// ```
@@ -124,18 +119,6 @@ class AutoSizeStyledText extends StatefulWidget {
   /// edge of the box.
   final int? maxLines;
 
-  /// Used to select a font when the same Unicode character can
-  /// be rendered differently, depending on the locale.
-  ///
-  /// It's rarely necessary to set this property. By default its value
-  /// is inherited from the enclosing app with `Localizations.localeOf(context)`.
-  ///
-  /// See [RenderParagraph.locale] for more information.
-  final Locale? locale;
-
-  /// {@macro flutter.painting.textPainter.strutStyle}
-  final StrutStyle? strutStyle;
-
   /// The minimum text size constraint to be used when auto-sizing text.
   ///
   /// Is being ignored if [presetFontSizes] is set.
@@ -162,22 +145,15 @@ class AutoSizeStyledText extends StatefulWidget {
   /// **Important:** PresetFontSizes have to be in descending order.
   final List<double>? presetFontSizes;
 
-  /// Synchronizes the size of multiple [AutoSizeText]s.
-  ///
-  /// If you want multiple [AutoSizeText]s to have the same text size, give all
-  /// of them the same [AutoSizeGroup] instance. All of them will have the
-  /// size of the smallest [AutoSizeText]
-  final AutoSizeGroup? group;
+  /// If the text is overflowing and does not fit its bounds, this widget is
+  /// displayed instead.
+  final Widget? overflowReplacement;
 
   /// Whether words which don't fit in one line should be wrapped.
   ///
   /// If false, the fontSize is lowered as far as possible until all words fit
   /// into a single line.
   final bool wrapWords;
-
-  /// If the text is overflowing and does not fit its bounds, this widget is
-  /// displayed instead.
-  final Widget? overflowReplacement;
 
   /// An alternative semantics label for this text.
   ///
@@ -193,11 +169,31 @@ class AutoSizeStyledText extends StatefulWidget {
   /// ```
   final String? semanticsLabel;
 
+  /// Synchronizes the size of multiple [AutoSizeText]s.
+  ///
+  /// If you want multiple [AutoSizeText]s to have the same text size, give all
+  /// of them the same [AutoSizeGroup] instance. All of them will have the
+  /// size of the smallest [AutoSizeText]
+  final AutoSizeGroup? group;
+
+  /// Used to select a font when the same Unicode character can
+  /// be rendered differently, depending on the locale.
+  ///
+  /// It's rarely necessary to set this property. By default its value
+  /// is inherited from the enclosing app with `Localizations.localeOf(context)`.
+  ///
+  /// See [RenderParagraph.locale] for more information.
+  final Locale? locale;
+
+  /// {@macro flutter.painting.textPainter.strutStyle}
+  final StrutStyle? strutStyle;
+
   /// Create a text widget with formatting via tags.
   ///
   AutoSizeStyledText({
     Key? key,
     required this.text,
+    required this.minFontSize,
     this.newLineAsBreaks = true,
     this.style,
     @Deprecated('Use tags property instead of styles')
@@ -211,15 +207,13 @@ class AutoSizeStyledText extends StatefulWidget {
     this.maxLines,
     this.locale,
     this.strutStyle,
-    this.minFontSize = 12,
     this.maxFontSize = double.infinity,
     this.stepGranularity = 1,
     this.presetFontSizes,
-    this.group,
-    this.wrapWords = true,
     this.overflowReplacement,
-    this.textKey,
+    this.wrapWords = true,
     this.semanticsLabel,
+    this.group,
   })  : assert(
           styles != null || tags != null,
           'Styles and tags cannot be used at the same time. Use styles for compatibility only. They will be removed in future versions.',
@@ -269,9 +263,9 @@ class _AutoSizeStyledTextState extends State<AutoSizeStyledText> {
     // ignore: deprecated_member_use_from_same_package
     if (widget.styles.containsKey(tagName)) {
       return AutoSizeStyledTextTag(
-          style:
-              widget.styles[// ignore: deprecated_member_use_from_same_package
-                  tagName]);
+        style: widget.styles[// ignore: deprecated_member_use_from_same_package
+            tagName],
+      );
     }
 
     return null;
@@ -382,7 +376,6 @@ class _AutoSizeStyledTextState extends State<AutoSizeStyledText> {
     return AutoSizeText.rich(
       _textSpans!,
       key: widget.key,
-      textKey: widget.textKey,
       style: widget.style,
       strutStyle: widget.strutStyle,
       minFontSize: widget.minFontSize,

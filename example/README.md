@@ -1,4 +1,4 @@
-# example
+# auto_size_styled_text_example
 
 A new Flutter project.
 
